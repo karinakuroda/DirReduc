@@ -77,5 +77,35 @@ namespace VestasApp.Tests
             // Assert
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void DirReduc_WithValidCaseSensitiveString_ShouldReduct()
+        {
+            // Arrange
+            var instructions = "[North, South, South, East, West, North, West]";
+            var expected = "WEST";
+            var reduct = new Reduct(instructions);
+
+            // Act
+            var result = reduct.DirReduc();
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void DirReduc_WithValidScapedString_ShouldReduct()
+        {
+            // Arrange
+            var instructions = "[\"NORTH\", \"SOUTH\", \"SOUTH\", \"EAST\", \"WEST\", \"NORTH\", \"WEST\"]";
+            var expected = "WEST";
+            var reduct = new Reduct(instructions);
+
+            // Act
+            var result = reduct.DirReduc();
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
     }
 }

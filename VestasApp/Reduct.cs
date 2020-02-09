@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Reflection.Metadata.Ecma335;
+    using System.Text.RegularExpressions;
 
     public class Reduct
     {
@@ -34,7 +35,10 @@
 
         private void ConvertToArray(string textInstructions)
         {
-            this.Instructions = textInstructions.Split(',');
+            var pattern = @"[\[\]\{\}\s\""\\]";
+            var replace = Regex.Replace(textInstructions, pattern, string.Empty);
+            
+            this.Instructions = replace.Split(',');
         }
 
         public bool Validate()
