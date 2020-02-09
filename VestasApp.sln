@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VestasApp", "VestasApp\VestasApp.csproj", "{7BD7392E-01C0-426F-93CD-651067AF11CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VestasApp.Tests", "VestasApp.Tests\VestasApp.Tests.csproj", "{6E896082-0111-4851-90F8-8BB10EA47208}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BD7392E-01C0-426F-93CD-651067AF11CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BD7392E-01C0-426F-93CD-651067AF11CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BD7392E-01C0-426F-93CD-651067AF11CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BD7392E-01C0-426F-93CD-651067AF11CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E896082-0111-4851-90F8-8BB10EA47208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E896082-0111-4851-90F8-8BB10EA47208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E896082-0111-4851-90F8-8BB10EA47208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E896082-0111-4851-90F8-8BB10EA47208}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFF92F1B-8401-4F32-813E-3FA9184BBA10}
+	EndGlobalSection
+EndGlobal
