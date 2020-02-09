@@ -6,8 +6,41 @@ namespace VestasApp.Tests
     public class ReductTests
     {
         [Theory]
+        [InlineData(new object[] { "NORTH", "WEST", "SOUTH", "EAST" })]
+        [InlineData(new object[] { "NORTH", "WEST", "SOUTH", "EAST", "SOUTH" })]
+        public void DirReduc_WithValidArray_ShouldNotBeReducible(params string[] instructions)
+        {
+            // Arrange
+            var expected = string.Join(", ", instructions);
+            var reduct = new Reduct(instructions);
+
+            // Act
+            var result = reduct.DirReduc();
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+
+        [Theory]
+        [InlineData(new object[] { "NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST" })]
+        public void DirReduc_WithValidArray_ShouldReductToWestWest(params string[] instructions)
+        {
+            // Arrange
+            var expected = "WEST, WEST";
+            var reduct = new Reduct(instructions);
+
+            // Act
+            var result = reduct.DirReduc();
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
         [InlineData(new object[] { "NORTH", "SOUTH", "EAST", "WEST", "WEST" })]
-        public void DirReduc_WithValidArray_ShouldReduct(params string[] instructions)
+        [InlineData(new object[] { "North", "South", "South", "East", "West", "North", "West" })]
+        public void DirReduc_WithValidArray_ShouldReductToWest(params string[] instructions)
         {
             // Arrange
             var expected = "WEST";
@@ -25,7 +58,7 @@ namespace VestasApp.Tests
         {
             // Arrange
             var instructions = new[] { "NORTH", "SOUTHH", "EAST", "WEST", "WEST" };
-            
+
             // Act & Assert
             Assert.Throws<ArgumentException>(() => new Reduct(instructions));
         }

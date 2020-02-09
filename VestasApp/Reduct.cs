@@ -50,6 +50,30 @@
             return true;
         }
 
+        public string DirReduc()
+        {
+            for (var i = 0; i < this.Instructions.Length; i++)
+            {
+                var currentInstruction = this.Instructions[i];
+                
+                if (this.Instructions.Length <= (i + 1) || this.Instructions.Length <= 1) break;
+
+                var nextInstruction = this.Instructions[i + 1];
+
+                foreach (var combination in PossibleCombinations)
+                {
+                    if (combination.Contains(currentInstruction) && combination.Contains(nextInstruction) && (currentInstruction != nextInstruction))
+                    {
+                        this.Instructions = this.Instructions.Where((source, index) => index != i && index != i + 1).ToArray();
+                        this.DirReduc();
+                    }
+                }
+            }
+
+            var result = string.Join(", ", this.Instructions.Where(s => !string.IsNullOrEmpty(s)));
+            return result;
+        }
+
         private bool IsValid(string instruction)
         {
             foreach (var combination in PossibleCombinations)
@@ -64,32 +88,6 @@
             }
 
             return false;
-        }
-
-        public string DirReduc()
-        {
-            for (var i = 0; i < this.Instructions.Length; i++)
-            {
-                var instruction = this.Instructions[i];
-
-                if (instruction == string.Empty) continue;
-                if (instruction.Length < (i + 1)) break;
-
-
-                var nextInstruction = this.Instructions[i + 1];
-
-                foreach (var combination in PossibleCombinations)
-                {
-                    if (combination.Contains(instruction) && combination.Contains(nextInstruction))
-                    {
-                        this.Instructions[i] = string.Empty;
-                        this.Instructions[i + 1] = string.Empty;
-                    }
-                }
-            }
-
-            var result = string.Join(",", this.Instructions.Where(s => !string.IsNullOrEmpty(s)));
-            return result;
         }
     }
 }
