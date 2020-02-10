@@ -1,97 +1,47 @@
 ﻿namespace VestasApp
 {
-    using System;
     using System.Linq;
-    using System.Reflection.Metadata.Ecma335;
-    using System.Text.RegularExpressions;
 
     public class Reduct
     {
         private static readonly string[][] PossibleCombinations = { new[] { "NORTH", "SOUTH" }, new[] { "EAST", "WEST" } };
+        
+        private readonly Instruction instruction;
 
-        private string[] instructions;
-
-        public string[] Instructions
-        {
-            get => this.instructions;
-
-            set
-            {
-                this.instructions = value.Select(s => s.ToUpper()).ToArray();
-            }
-        }
+        private string[] directions;
 
         public Reduct(string[] instructions)
         {
-            this.Instructions = instructions;
-            this.Validate();
+            this.directions = new Instruction(instructions).ToArray();
         }
 
         public Reduct(string textInstructions)
         {
-            this.ConvertToArray(textInstructions);
-            this.Validate();
+            this.directions = new Instruction(textInstructions).ToArray();
         }
-
-        private void ConvertToArray(string textInstructions)
-        {
-            var pattern = @"[\[\]\{\}\s\""\\]";
-            var replace = Regex.Replace(textInstructions, pattern, string.Empty);
-            
-            this.Instructions = replace.Split(',');
-        }
-
-        public bool Validate()
-        {
-            foreach (var instruction in this.Instructions)
-            {
-                if (!this.IsValid(instruction))
-                {
-                    throw new ArgumentException("Invalid instruction");
-                }
-            }
-
-            return true;
-        }
-
+        
         public string DirReduc()
         {
-            for (var i = 0; i < this.Instructions.Length; i++)
+            for (var i = 0; i < this.directions.Length; i++)
             {
-                var currentInstruction = this.Instructions[i];
+                var currentInstruction = this.directions[i];
                 
-                if (this.Instructions.Length <= (i + 1) || this.Instructions.Length <= 1) break;
+                if (this.directions.Length <= (i + 1) || this.directions.Length <= 1) break;
 
-                var nextInstruction = this.Instructions[i + 1];
+                var nextInstruction = this.directions[i + 1];
 
                 foreach (var combination in PossibleCombinations)
                 {
                     if (combination.Contains(currentInstruction) && combination.Contains(nextInstruction) && (currentInstruction != nextInstruction))
                     {
-                        this.Instructions = this.Instructions.Where((source, index) => index != i && index != i + 1).ToArray();
+                        this.directions = this.directions.Where((source, index) => index != i && index != i + 1).ToArray();
                         this.DirReduc();
                     }
                 }
             }
 
-            var result = string.Join(", ", this.Instructions.Where(s => !string.IsNullOrEmpty(s)));
+            var result = string.Join(", ", this.directions.Where(s => !string.IsNullOrEmpty(s)));
             return result;
-        }
-
-        private bool IsValid(string instruction)
-        {
-            foreach (var combination in PossibleCombinations)
-            {
-                foreach (var c in combination)
-                {
-                    if (combination.Contains(instruction))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
     }
 }
