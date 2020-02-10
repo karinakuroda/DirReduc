@@ -1,32 +1,24 @@
 ﻿namespace VestasApp
 {
-    using System.Linq;
+    using System;
 
+    /// <summary>
+    /// Responsible for validate the direction informed
+    /// </summary>
     public class Direction
     {
-        public static readonly string[][] PossibleCombinations = { new[] { "NORTH", "SOUTH" }, new[] { "EAST", "WEST" } };
-        
         public Direction(string name)
         {
-            this.Name = name.ToUpper();
-        }
-
-        public string Name { get; set; }
-
-        public bool IsValid()
-        {
-            foreach (var combination in PossibleCombinations)
+            try
             {
-                foreach (var c in combination)
-                {
-                    if (combination.Contains(this.Name))
-                    {
-                        return true;
-                    }
-                }
+                this.Name = (CardinalDirection)Enum.Parse(typeof(CardinalDirection), name.ToUpper());
             }
-
-            return false;
+            catch (ArgumentException)
+            {
+                throw new ArgumentException("Invalid Direction");
+            }
         }
+
+        public CardinalDirection Name { get; set; }
     }
 }

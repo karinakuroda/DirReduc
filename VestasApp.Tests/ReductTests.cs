@@ -12,7 +12,7 @@ namespace VestasApp.Tests
         {
             // Arrange
             var expected = string.Join(", ", instructions);
-            var reduct = new Reduct(instructions);
+            var reduct = new Reduce(instructions);
 
             // Act
             var result = reduct.DirReduc();
@@ -28,7 +28,7 @@ namespace VestasApp.Tests
         {
             // Arrange
             var expected = "WEST, WEST";
-            var reduct = new Reduct(instructions);
+            var reduct = new Reduce(instructions);
 
             // Act
             var result = reduct.DirReduc();
@@ -44,7 +44,7 @@ namespace VestasApp.Tests
         {
             // Arrange
             var expected = "WEST";
-            var reduct = new Reduct(instructions);
+            var reduct = new Reduce(instructions);
 
             // Act
             var result = reduct.DirReduc();
@@ -60,7 +60,7 @@ namespace VestasApp.Tests
             var instructions = new[] { "NORTH", "SOUTHH", "EAST", "WEST", "WEST" };
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => new Reduct(instructions));
+            Assert.Throws<ArgumentException>(() => new Reduce(instructions));
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace VestasApp.Tests
             // Arrange
             var instructions = new[] { "north", "south", "east", "west", "west" };
             var expected = "WEST";
-            var reduct = new Reduct(instructions);
+            var reduct = new Reduce(instructions);
 
             // Act
             var result = reduct.DirReduc();
@@ -84,7 +84,7 @@ namespace VestasApp.Tests
             // Arrange
             var instructions = "[North, South, South, East, West, North, West]";
             var expected = "WEST";
-            var reduct = new Reduct(instructions);
+            var reduct = new Reduce(instructions);
 
             // Act
             var result = reduct.DirReduc();
@@ -99,7 +99,7 @@ namespace VestasApp.Tests
             // Arrange
             var instructions = "[\"NORTH\", \"SOUTH\", \"SOUTH\", \"EAST\", \"WEST\", \"NORTH\", \"WEST\"]";
             var expected = "WEST";
-            var reduct = new Reduct(instructions);
+            var reduct = new Reduce(instructions);
 
             // Act
             var result = reduct.DirReduc();

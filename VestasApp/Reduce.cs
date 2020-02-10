@@ -2,20 +2,21 @@
 {
     using System.Linq;
 
-    public class Reduct
+    /// <summary>
+    /// Responsible for reducing the list of directions informed
+    /// </summary>
+    public class Reduce
     {
         private static readonly string[][] PossibleCombinations = { new[] { "NORTH", "SOUTH" }, new[] { "EAST", "WEST" } };
         
-        private readonly Instruction instruction;
-
         private string[] directions;
 
-        public Reduct(string[] instructions)
+        public Reduce(string[] instructions)
         {
             this.directions = new Instruction(instructions).ToArray();
         }
 
-        public Reduct(string textInstructions)
+        public Reduce(string textInstructions)
         {
             this.directions = new Instruction(textInstructions).ToArray();
         }
